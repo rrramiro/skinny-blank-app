@@ -14,8 +14,9 @@ val appName = "skinny-blank-app"
 val appVersion = "0.1.0-SNAPSHOT"
 
 val skinnyVersion = "2.3.6"
-val theScalaVersion = "2.12.1"
+val theScalaVersion = "2.11.8"
 val jettyVersion = "9.3.17.v20170317"
+val servletVersion = "3.1.0"
 
 lazy val baseSettings = servletSettings ++ Seq(
   organization := appOrganization,
@@ -40,7 +41,7 @@ lazy val baseSettings = servletSettings ++ Seq(
     "org.skinny-framework"    %% "skinny-test"          % skinnyVersion   % "test",
     "org.eclipse.jetty"       %  "jetty-webapp"         % jettyVersion    % "container",
     "org.eclipse.jetty"       %  "jetty-plus"           % jettyVersion    % "container",
-    "javax.servlet"           %  "javax.servlet-api"    % "3.1.0"         % "container;provided;test"
+    "javax.servlet"           %  "javax.servlet-api"    % servletVersion  % "container;provided;test"
   ),
   // ------------------------------
   // for ./skinnny console
@@ -112,7 +113,7 @@ lazy val precompileDev = (project in file(".")).settings(devBaseSettings, scalat
 lazy val task = (project in file("task")).settings(baseSettings).settings(
   mainClass := Some("TaskRunner"),
   name := appName + "-task",
-  libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0"
+  libraryDependencies += "javax.servlet" % "javax.servlet-api" % servletVersion
 ) dependsOn(dev)
 
 // -------------------------------------------------------
